@@ -14,10 +14,10 @@ end
 
 def gameurl
   gameurl = page.xpath('//a[contains(text(), "-")]').map { |link| link['href'] }
-  gameurl.each do |gameurl|
-    completegameurl = "#{url}#{gameurl}"
-    puts completegameurl
-  end
+  # gameurl.each do |gameurl|
+  #   completegameurl = "#{url}#{gameurl}"
+  #   puts completegameurl
+  # end
 end
 
 gameurl.each do |gameurl|
