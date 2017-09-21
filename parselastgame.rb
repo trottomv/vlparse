@@ -2,7 +2,6 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-require 'uri'
 
 def url
   url = "http://web.legabasket.it"
