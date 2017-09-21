@@ -1,0 +1,145 @@
+
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'uri'
+
+def url
+  url = "http://web.legabasket.it"
+end
+
+def page
+  team = "http://web.legabasket.it/team/1296/consultinvest_pesaro"
+  page = Nokogiri::HTML(open("#{team}"))
+end
+
+def lastgameurl
+  # gameurl = page.xpath('//a[contains(text(""), "matchResult")]').map { |link| link['href'] }.each do | gameurl |
+  # gameurl = page.css(".other-team-information").each do | gameurl |
+  lastgameurl = page.css("a.matchResult").map { |link| link['href'] }
+end
+
+# puts lastgameurl.first.split('/')[2]
+
+def lastgamestand
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".game-result-container").each do | gameresult |
+    puts gameresult.text
+  end
+end
+
+puts lastgamestand
+
+def dategame
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".page-title").each do | title |
+    puts title.text.split(', ')[0].gsub(" - ", "").to_str
+  end
+end
+
+puts dategame
+
+def stadium
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".page-title").each do | title |
+    puts title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
+  end
+end
+
+puts stadium
+
+def round
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".titleBig").each do | title |
+    puts title.text
+  end
+end
+
+puts round
+
+
+def team1
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".team-name1").each do | title |
+    puts title.text
+  end
+end
+
+puts team1
+
+
+def team2
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".team-name2").each do | title |
+    puts title.text
+  end
+end
+
+puts team2
+
+def gameresult
+  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+  page = Nokogiri::HTML(open("#{completegameurl}"))
+  lastgamestand = page.css(".game-total-result").each do | result |
+    puts result.text
+  end
+end
+
+puts gameresult
+
+# def parse
+#   lastgame = page.css(".other-team-information")
+#   puts lastgame.content
+#   # lastgame.each do | r |
+#   #   puts r.url
+#   #   puts r.content
+#   # end
+# end
+
+
+# def gameurl
+#   gameurl = page.xpath('//a[contains(text(), "-")]').map { |link| link['href'] }
+#   # gameurl.each do |gameurl|
+#   #   completegameurl = "#{url}#{gameurl}"
+#   #   puts completegameurl
+#   # end
+# end
+#
+# gameurl.each do |gameurl|
+#   puts "#{url}#{gameurl}"
+# end
+#
+# def gamedatetime
+#   datetime = page.xpath('//a[contains(text(), ":")]')
+# end
+#
+# gamedatetime.each do | gamedatetime |
+#   puts gamedatetime.text
+# end
+#
+# gamedatetime.each do | d |
+#   d = gamedatetime.text
+#   if d < "#{Time.now.strftime('%d/%m/%Y%H:%M')}"
+#     puts d
+#   end
+# end
+#
+#
+# def gameresult
+#   gameurl.each do | gameurl |
+#     r = Nokogiri::HTML(open("#{url}#{gameurl}"))
+#     r.css(".game-result-container,.page-title").each do |gamestand|
+#         puts gamestand.content
+#     end
+#   end
+# end
+#
+# gameresult.each do |gameresult|
+#   puts gameresult
+# end

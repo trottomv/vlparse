@@ -20,17 +20,17 @@ def gameurl
   # end
 end
 
-# gameurl.each do |gameurl|
-#   puts "#{url}#{gameurl}"
-# end
+gameurl.each do |gameurl|
+  puts "#{url}#{gameurl}"
+end
 
 def gamedatetime
   datetime = page.xpath('//a[contains(text(), ":")]')
 end
 
-# gamedatetime.each do | gamedatetime |
-#   puts gamedatetime.text
-# end
+gamedatetime.each do | gamedatetime |
+  puts gamedatetime.text
+end
 
 gamedatetime.each do | d |
   d = gamedatetime.text
