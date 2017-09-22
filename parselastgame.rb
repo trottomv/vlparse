@@ -3,21 +3,21 @@ require 'nokogiri'
 require 'open-uri'
 
 def url
-  url = "http://web.legabasket.it"
+  "http://web.legabasket.it"
 end
 
 def teampage
   team = "http://web.legabasket.it/team/1296/consultinvest_pesaro"
-  page = Nokogiri::HTML(open("#{team}"))
+  Nokogiri::HTML(open("#{team}"))
 end
 
 def lastgameurl
-  lastgameurl = teampage.css("a.matchResult").map { |link| link['href'] }
+  teampage.css("a.matchResult").map { |link| link['href'] }
 end
 
 def parse
   gameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  parse = Nokogiri::HTML(open("#{gameurl}"))
+  Nokogiri::HTML(open("#{gameurl}"))
 end
 
 def gamestand
@@ -30,12 +30,11 @@ def dategame
 end
 
 def stadium
-  parse.css(".page-title").split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
+  parse.css(".page-title")
   # title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
 end
 
 def round
-  parse
   parse.css(".titleBig")
 end
 
@@ -55,8 +54,9 @@ end
 #   Date.parse('dategame.text') < Date.today.strftime('%d/%m/%Y%H:%M') #"07/05/201720:45"
 # end
 
-puts round.text.lstrip.chop
-puts dategame.text.split(', ')[0].gsub(" - ", "").lstrip
-puts "#{team1.text} VS #{team2.text}"
-puts gameresult.text.lstrip.chop
+# puts round.text.lstrip.chop
+puts "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.lstrip.chop}"
+# puts stadium.text.split(', ')[1].split(': ')[1].gsub(" - ", "").lstrip.chop
+puts "#{team1.text} VS #{team2.text} #{gameresult.text.lstrip.chop} "
+# puts gameresult.text.lstrip.chop
 puts "Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
