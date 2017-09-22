@@ -26,10 +26,12 @@ end
 
 def dategame
   parse.css(".page-title")
+  #title.text.split(', ')[0].gsub(" - ", "").to_str
 end
 
 def stadium
-  parse.css(".page-title")
+  parse.css(".page-title").split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
+  # title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
 end
 
 def round
@@ -54,6 +56,7 @@ end
 # end
 
 puts round.text.lstrip.chop
+puts dategame.text.split(', ')[0].gsub(" - ", "").lstrip
 puts "#{team1.text} VS #{team2.text}"
 puts gameresult.text.lstrip.chop
 puts "Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
