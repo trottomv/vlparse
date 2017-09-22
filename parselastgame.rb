@@ -12,8 +12,6 @@ def teampage
 end
 
 def lastgameurl
-  # gameurl = page.xpath('//a[contains(text(""), "matchResult")]').map { |link| link['href'] }.each do | gameurl |
-  # gameurl = page.css(".other-team-information").each do | gameurl |
   lastgameurl = teampage.css("a.matchResult").map { |link| link['href'] }
 end
 
@@ -34,7 +32,6 @@ def stadium
   parse.css(".page-title")
 end
 
-
 def round
   parse
   parse.css(".titleBig")
@@ -52,9 +49,9 @@ def gameresult
   parse.css(".game-total-result")
 end
 
-def condition
-  Date.parse('dategame.text') < Date.today.strftime('%d/%m/%Y%H:%M') #"07/05/201720:45"
-end
+# def condition
+#   Date.parse('dategame.text') < Date.today.strftime('%d/%m/%Y%H:%M') #"07/05/201720:45"
+# end
 
 puts round.text.lstrip.chop
 puts "#{team1.text} VS #{team2.text}"
