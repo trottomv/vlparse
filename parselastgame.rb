@@ -1,4 +1,3 @@
-
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
@@ -20,9 +19,12 @@ end
 
 # puts lastgameurl.first.split('/')[2]
 
+def gameurl
+  gameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
+end
+
 def lastgamestand
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".game-result-container").each do | gameresult |
     puts gameresult.text
   end
@@ -31,8 +33,7 @@ end
 # puts lastgamestand
 
 def dategame
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".page-title").each do | title |
     puts title.text.split(', ')[0].gsub(" - ", "").to_str
   end
@@ -41,8 +42,7 @@ end
 # puts dategame
 
 def stadium
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".page-title").each do | title |
     puts title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
   end
@@ -51,8 +51,7 @@ end
 # puts stadium
 
 def round
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".titleBig").each do | title |
     puts title.text
   end
@@ -62,8 +61,7 @@ end
 
 
 def team1
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".team-name1").each do | title |
     puts title.text
   end
@@ -73,8 +71,7 @@ end
 
 
 def team2
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".team-name2").each do | title |
     puts title.text
   end
@@ -83,8 +80,7 @@ end
 # puts team2
 
 def gameresult
-  completegameurl = "#{url}/game/#{lastgameurl.first.split('/')[2]}/"
-  page = Nokogiri::HTML(open("#{completegameurl}"))
+  page = Nokogiri::HTML(open("#{gameurl}"))
   lastgamestand = page.css(".game-total-result").each do | result |
     puts result.text
   end
@@ -98,4 +94,4 @@ end
 
 # puts condition
 
-puts "#{round}#{dategame}#{stadium}#{team1}#{team2}#{gameresult} Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
+puts "#{round}#{dategame}#{stadium}#{team1}#{gameresult}#{team2} Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
