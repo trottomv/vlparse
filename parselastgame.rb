@@ -54,9 +54,7 @@ end
 #   Date.parse('dategame.text') < Date.today.strftime('%d/%m/%Y%H:%M') #"07/05/201720:45"
 # end
 
-# puts round.text.lstrip.chop
 puts "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.lstrip.chop}"
 # puts stadium.text.split(', ')[1].split(': ')[1].gsub(" - ", "").lstrip.chop
 puts "#{team1.text} VS #{team2.text} #{gameresult.text.lstrip.chop} "
-# puts gameresult.text.lstrip.chop
 puts "Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
