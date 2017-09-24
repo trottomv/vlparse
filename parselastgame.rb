@@ -73,60 +73,6 @@ def playerscore
   end
 end
 
-
-
-
-# def playername
-#   parse.css("#{teamselect}").each do | tr |
-#           puts tr.css('td').map{ |td|
-#             td.text.gsub(/[$,](?=\d)/, '').gsub(/\302\240|\s/, ' ').strip
-#           }[2]
-#
-#         # puts playername
-#   end
-# end
-
-
-# def teamscoresheet
-#   if team1.text.include? "Pesaro"
-#     parse.css('[id="fullstat1"]')
-#   elsif team2.text.include? "Pesaro"
-#       # parse.css('[id="fullstat2"]')
-#       parse.css('[id="fullstat2"] > tbody > tr').each do | tr |
-#           playername = tr.css('td').map{ |td|
-#             td.text.gsub(/[$,](?=\d)/, '').gsub(/\302\240|\s/, ' ').strip
-#           }.join(" | ").split(" | ")[2]
-#           playerscore = tr.css('td').map{ |td|
-#             td.text.gsub(/[$,](?=\d)/, '').gsub(/\302\240|\s/, ' ').strip
-#           }.join(" | ").split(" | ")[3].to_i
-#           plusminus = tr.css('td').map{ |td|
-#             td.text.gsub(/[$,](?=\d)/, '').gsub(/\302\240|\s/, ' ').strip
-#           }.join(" | ").split(" | ")[27].to_i
-#           # if playername.include? "Hazell"
-#           # if playerscore.max
-#             puts playername
-#             puts playerscore
-#             # puts plusminus
-#           # end
-#           # puts plusminus
-#         # Nokogiri::HTML("#{player}").css("td").each do | playerstand |
-#         #   puts playerstand.text
-#         # end
-#       end
-#   end
-# end
-
-# def condition
-#   Date.parse('dategame.text') < Date.today.strftime('%d/%m/%Y%H:%M') #"07/05/201720:45"
-
-  # if (01/01/2016..01/01/2017) === dategame
-  #   puts true
-  # else
-  #   puts false
-  # end
-
-# end
-
 puts "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}"
 # puts stadium.text.split(', ')[1].split(': ')[1].gsub(" - ", "").lstrip.chop
 puts "#{team1.text} VS #{team2.text} #{gameresult.text.strip}"
