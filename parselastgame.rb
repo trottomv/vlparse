@@ -75,7 +75,8 @@ class Scoresheet
   end
 
   def message
-    message = "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}
+    message =
+"#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}
 #{team1.text} VS #{team2.text} #{gameresult.text.strip}
 Topscorer Pesaro: #{playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ")} #{playerscore.sort[-2]}pt
 Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
