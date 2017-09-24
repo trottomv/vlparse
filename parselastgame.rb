@@ -29,7 +29,6 @@ class Scoresheet
 
   def dategame
     parse.css(".page-title")
-    #title.text.split(', ')[0].gsub(" - ", "").to_str
   end
 
   # def stadium
@@ -85,15 +84,3 @@ Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
 end
 
 puts Scoresheet.new.message
-#
-# puts "#{Scoresheet.new.dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{Scoresheet.new.round.text.strip}"
-# # puts stadium.text.split(', ')[1].split(': ')[1].gsub(" - ", "").lstrip.chop
-# puts "#{Scoresheet.new.team1.text} VS #{Scoresheet.new.team2.text} #{Scoresheet.new.gameresult.text.strip}"
-# puts "Topscorer: #{Scoresheet.new.playername[Scoresheet.new.playerscore.index(Scoresheet.new.playerscore.sort[-2])].split(" ").reverse.join(" ")} #{Scoresheet.new.playerscore.sort[-2]}pt"
-# puts "Tabellino: #{Scoresheet.new.url}/game/#{Scoresheet.new.lastgameurl.first.split('/')[2]}/"
-# puts teamscoresheet
-# puts gameresult.text.strip
-# puts "#{playername} #{playerscore}"
-# puts playerscore.sort[-2] #topscore
-# puts playername["#{playerscore.index(playerscore.sort[-2])}"]
-# puts playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ") #topscorername "name surname"
