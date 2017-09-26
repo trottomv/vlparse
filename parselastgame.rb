@@ -8,10 +8,16 @@ class Scoresheet
     "http://web.legabasket.it"
   end
 
+  def clubpage
+    club = "http://web.legabasket.it/team/tbd.phtml?club=PS"
+    Nokogiri::HTML(open("#{club}")).css("div.menu a").map { |link| link['href']}[0]
+  end
+
   def teampage
-    team = "http://web.legabasket.it/team/1296/consultinvest_pesaro" #2016
+    # team = "http://web.legabasket.it/team/1296/consultinvest_pesaro" #2016
     # team = "http://web.legabasket.it/team/1314/vl_pesaro" #2017
-    Nokogiri::HTML(open("#{team}"))
+    Nokogiri::HTML(open("#{url}#{clubpage}")) #open team url
+    # Nokogiri::HTML(open("#{team}"))
   end
 
   def lastgameurl
@@ -24,7 +30,7 @@ class Scoresheet
   end
 
   def gamestand
-    parse.css(".game-result-container")
+      parse.css(".game-result-container")
   end
 
   def dategame
@@ -75,13 +81,25 @@ class Scoresheet
   end
 
   def message
-    message =
-"#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}
-#{team1.text} VS #{team2.text} #{gameresult.text.strip}
-Topscorer Pesaro: #{playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ")} #{playerscore.sort[-2]}pt
-Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
-    message
+    if lastgameurl.empty?
+      message = "Nessuna partita di campionato giocata recentemente"
+      message
+    else
+      message =
+  "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}
+  #{team1.text} VS #{team2.text} #{gameresult.text.strip}
+  Topscorer Pesaro: #{playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ")} #{playerscore.sort[-2]}pt
+  Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
+      message
+    end
   end
 end
 
 puts Scoresheet.new.message
+# # puts Scoresheet.new.lastgameurl.empty?
+# if Scoresheet.new.lastgameurl.empty?
+#   puts "nessuna partita"
+# else
+#   puts Scoresheet.new.message
+#   # puts Scoresheet.new.clubpage
+# end
