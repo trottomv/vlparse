@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-
+require 'date'
 
 class Scoresheet
   def url
@@ -34,7 +34,7 @@ class Scoresheet
   end
 
   def dategame
-    parse.css(".page-title")
+    parse.css(".page-title").text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]
   end
 
   # def stadium
@@ -43,7 +43,7 @@ class Scoresheet
   # end
 
   def round
-    parse.css(".titleBig")
+    parse.css(".titleBig").text.strip
   end
 
   def team1
@@ -55,7 +55,7 @@ class Scoresheet
   end
 
   def gameresult
-    parse.css(".game-total-result")
+    parse.css(".game-total-result").text.strip
   end
 
   def teamselect
@@ -86,16 +86,20 @@ class Scoresheet
       message
     else
       message =
-  "#{dategame.text.split(', ')[0].gsub(" - ", "").lstrip[0..-6]} #{round.text.strip}
-  #{team1.text} VS #{team2.text} #{gameresult.text.strip}
-  Topscorer Pesaro: #{playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ")} #{playerscore.sort[-2]}pt
-  Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
+"#{dategame} #{round}
+#{team1.text} VS #{team2.text} #{gameresult}
+Topscorer Pesaro: #{playername[playerscore.index(playerscore.sort[-2])].split(" ").reverse.join(" ")} #{playerscore.sort[-2]}pt
+Tabellino: #{url}/game/#{lastgameurl.first.split('/')[2]}/"
       message
     end
   end
 end
 
 puts Scoresheet.new.message
+# puts Scoresheet.new.lastgameurl.first.split('/')[2]
+# puts Scoresheet.new.dategame
+# diffdate = Time.now.to_i - DateTime.new(Scoresheet.new.dategame.split('/')[2].to_i,Scoresheet.new.dategame.split('/')[1].to_i,Scoresheet.new.dategame.split('/')[0].to_i).strftime('%s').to_i
+# puts diffdate/60/60/24 #diffdate in n. of day
 # # puts Scoresheet.new.lastgameurl.empty?
 # if Scoresheet.new.lastgameurl.empty?
 #   puts "nessuna partita"
