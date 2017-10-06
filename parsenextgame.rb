@@ -40,10 +40,10 @@ class Nextgame
     parse.css(".page-title").text.split(', ')[0].gsub(" - ", "").lstrip[-5..15]
   end
 
-  # def stadium
-  #   parse.css(".page-title")
-  #   # title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
-  # end
+  def stadium
+    parse.css(".page-title").text.split(', ')[1].split(': ')[1].gsub(" - ", "").strip
+    # title.text.split(', ')[1].split(': ')[1].gsub(" - ", "").to_str
+  end
 
   def round
     parse.css(".titleBig").text.strip
@@ -67,9 +67,9 @@ class Nextgame
       message
     else
       message =
-  "#{dategame} #{hourgame}
-  #{round}
-  #{team1.text} VS #{team2.text}"
+"#{dategame} #{hourgame} [#{stadium}]
+#{round}
+#{team1.text} VS #{team2.text}"
       message
     end
   end
