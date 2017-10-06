@@ -61,11 +61,16 @@ class Nextgame
   end
 
   def message
-    message =
-"#{dategame} #{hourgame} 
-#{round}
-#{team1.text} VS #{team2.text}"
-    message
+    if nextgameurl.empty?
+      message = "Nessuna partita di campionato a breve"
+      message
+    else
+      message =
+  "#{dategame} #{hourgame}
+  #{round}
+  #{team1.text} VS #{team2.text}"
+      message
+    end
   end
 
 end
