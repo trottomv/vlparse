@@ -14,8 +14,8 @@ class Nextgame
   end
 
   def calendarteampage
-    # Nokogiri::HTML(open("#{url}#{clubpage}")) #open team url
-    Nokogiri::HTML(open("http://web.legabasket.it/team/1296/consultinvest_pesaro")) #open team url
+    Nokogiri::HTML(open("#{url}#{clubpage}")) #open team url
+    # Nokogiri::HTML(open("http://web.legabasket.it/team/1296/consultinvest_pesaro")) #test team url 2016
   end
 
   def nextgameurl
