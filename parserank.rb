@@ -19,13 +19,13 @@ class Rank
       position: cell.search('th, td')[0].text,
       team: cell.search('th, td')[1].text,
       point: cell.search('th, td')[2].text
-    } #.each do | rankteam |
+    }
     end
   end
 
   def message
       rankparse.map do | rank |
-        message = " #{rank[:position].chomp('.')} [#{rank[:point]}pt] #{rank[:team]}"
+        message = "[#{rank[:point]}pt] #{rank[:position].chomp('.')} #{rank[:team]}" #.each { |message| message }
         message
       end
   end
