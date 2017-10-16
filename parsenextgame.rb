@@ -1,4 +1,4 @@
-require 'rubygems'
+# require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'date'
@@ -29,7 +29,7 @@ class Nextgame
   end
 
   def gamestand
-      parse.css(".game-result-container")
+    parse.css(".game-result-container")
   end
 
   def dategame
