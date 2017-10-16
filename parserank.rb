@@ -26,7 +26,7 @@ class Rank
   def message
       rankparse.map do | rank |
         message = "[#{rank[:point]}pt] #{rank[:position].chomp('.')} #{rank[:team]}" #.each { |message| message }
-        message
+        message.split[0..4].join(' ') #.map {|message| message }
       end
   end
 
